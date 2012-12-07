@@ -1,0 +1,87 @@
+> http://animal.discovery.com/tv/talent/talent.html
+> http://animal.discovery.com/tv/americas-cutest-pet/
+$VAR1 = [
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/c96b85ddb0a31f5b3e91747e0bd2a6fdb54d74ad_c96b85ddb0a31f5b3e91747e0bd2a6fdb54d74ad.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/d8/53/zs2w_th7b_13223400101197_SuperBowl-,400k,130k,200k,600k,1000k,1500k,.mp4.csmil/master.m3u8',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/americas-cutest-cat.htm')}, 'URI::http' ),
+            'playlist_size' => '9 clips',
+            'duration' => 62,
+            'title' => 'America\'s Cutest Cat',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/128924103799213223400101197_SuperBowl.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/486b0e419c9a38a47f694fcdbd305473f656916a_486b0e419c9a38a47f694fcdbd305473f656916a.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/6f/bf/fmhj_bzyr_13236500101197_CuteDog-,400k,130k,200k,600k,1000k,1500k,.mp4.csmil/master.m3u8',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/americas-cutest-dog.htm')}, 'URI::http' ),
+            'playlist_size' => '9 clips',
+            'duration' => 62,
+            'title' => 'America\'s Cutest Dog',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/129011546857113236500101197_CuteDog.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/c1fbaf718e5f81c5d0c00ae0eb06770cd8130b61_c1fbaf718e5f81c5d0c00ae0eb06770cd8130b61.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/95/28/13541400301197_The_Hungry_Kitten-,400k,110k,200k,600k,800k,1500k,.mp4.csmil/master.m3u8',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/videos.htm')}, 'URI::http' ),
+            'playlist_size' => '6 clips',
+            'duration' => 44,
+            'title' => 'America\'s Cutest Pet',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/132146658946013541400301197_The_Hungry_Kitten.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/c5652949750bdfb759f5c22b346226ae30e809b5_c5652949750bdfb759f5c22b346226ae30e809b5.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/ff/42/13541400801197_Ticklish_Slow_Loris-,400k,110k,200k,600k,800k,1500k,.mp4.csmil/master.m3u8',
+            'show_title' => 'America\'s Cutest Pet',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/perfect-ten-cute-slow-loris.htm')}, 'URI::http' ),
+            'duration' => 43,
+            'title' => '"Perfect Ten" Cute Slow Loris',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/132146706043813541400801197_Ticklish_Slow_Loris.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/c1fbaf718e5f81c5d0c00ae0eb06770cd8130b61_c1fbaf718e5f81c5d0c00ae0eb06770cd8130b61.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/95/28/13541400301197_The_Hungry_Kitten-,400k,110k,200k,600k,800k,1500k,.mp4.csmil/master.m3u8',
+            'show_title' => 'America\'s Cutest Pet',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/the-hungry-kitten.htm')}, 'URI::http' ),
+            'duration' => 44,
+            'title' => 'The Hungry Kitten',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/132146658946013541400301197_The_Hungry_Kitten.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/1ba76ef6f4862ef56621018858b19c88fba34c5b_1ba76ef6f4862ef56621018858b19c88fba34c5b.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/e1/6a/13541400201197_Odd_Couple-,400k,110k,200k,600k,800k,1500k,.mp4.csmil/master.m3u8',
+            'show_title' => 'America\'s Cutest Pet',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/cat-dolphin-bff.htm')}, 'URI::http' ),
+            'duration' => 46,
+            'title' => 'Cat Dolphin = BFF',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/132146633229913541400201197_Odd_Couple.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/4adfeffdfbce55edd953bcaa9390d06c645c28f7_4adfeffdfbce55edd953bcaa9390d06c645c28f7.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/2a/3d/13541400701197_Dancing_Goat-,400k,110k,200k,600k,800k,1500k,.mp4.csmil/master.m3u8',
+            'show_title' => 'America\'s Cutest Pet',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/the-dancing-goat.htm')}, 'URI::http' ),
+            'duration' => 41,
+            'title' => 'The Dancing Goat',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/132146693438913541400701197_Dancing_Goat.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/9997306d6804623e6d7a33b42d1fa6814aacdb6c_9997306d6804623e6d7a33b42d1fa6814aacdb6c.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/6a/3c/13541400501197_Bam__Dead_Parrot-,400k,110k,200k,600k,800k,1500k,.mp4.csmil/master.m3u8',
+            'show_title' => 'America\'s Cutest Pet',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/the-parrot-that-plays-dead.htm')}, 'URI::http' ),
+            'duration' => 38,
+            'title' => 'The Parrot that Plays Dead',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/132146685932513541400501197_Bam__Dead_Parrot.jpg')}, 'URI::http' )
+          },
+          {
+            'thumbnail' => 'http://netstorage.discovery.com/feeds/brightcove/asset-thumbnails/apl/b5f83e57efc67a94c6aa89a2e00babfadc4335f5_b5f83e57efc67a94c6aa89a2e00babfadc4335f5.jpg',
+            'm3u' => 'http://discidevflash-f.akamaihd.net/i/digmed/hdnet/bd/9b/13541400401197_Turtle_vs_Tamato-,400k,110k,200k,600k,800k,1500k,.mp4.csmil/master.m3u8',
+            'show_title' => 'America\'s Cutest Pet',
+            'episode_link' => bless( do{\(my $o = 'http://animal.discovery.com/tv-shows/americas-cutest-pet/videos/the-turtle-and-the-tomato.htm')}, 'URI::http' ),
+            'duration' => 56,
+            'title' => 'The Turtle and the Tomato',
+            'thumbnail_url' => bless( do{\(my $o = 'http://netstorage.discovery.com/feeds/brightcove/asset-stills/apl/132146645016113541400401197_Turtle_vs_Tamato.jpg')}, 'URI::http' )
+          }
+        ];
+
+> http://animal.discovery.com/tv/american-stuffers/
