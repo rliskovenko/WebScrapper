@@ -126,7 +126,7 @@ my $showlist_scraper = scraper {
 sub _scrape {
     foreach my $url ( @showlist_urls ) {
         my $res = $showlist_scraper->scrape( URI->new( $url ) );
-        print to_json( $res )."\n";
+        print to_json( $res, { relaxed => 1, allow_blessed => 1 } )."\n";
     }
 
 }
