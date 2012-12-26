@@ -42,6 +42,7 @@ my $showlist_scraper = scraper {
                     my $tag = shift;
                     my @episodes = ();
                     my $episodes_list_url = URI->new_abs( $tag->attr('href'), $BASE_URI );
+                    # Get link to episodes list from special field
                     my $episodes_url_scraper = scraper {
                         process "#all-videos .module-videos-all", episodes_url => '@data-service-uri';
                     };
@@ -65,13 +66,44 @@ my $showlist_scraper = scraper {
                     };
                     while ( $next_page ) {
                         if ( $next_page > 0 ) {
-                            $next_page_url = $episodes_list_url->as_string();
+                            $next_page_url = $episodes_fulllist_url->as_string();
                             $next_page_url =~ s/page=\d+/page=$next_page/igmx;
                             $next_page_url = URI->new( $next_page_url );
                         }
                         
                         my $res = $episode_list_scraper->scrape( $next_page_url );
                         foreach my $episode ( @{ $res->{episodes} } ) {
+                            # Fetch episodes or sub-episodes depending on playlist flag
+                            if ( $episode->{playlist_size} =~ /^\d/ ) {
+                                
+                            } else {
+                                my $one_episode_scraper = scraper {
+                                    process "script", 'js[]' => sub {
+                                        my $tmp = $_->as_HTML();
+                                        my ( $clips_js ) = $tmp =~ /(\"clips\":\s+\[[^]]+\])/ismx;
+                                        my $clip_data = try {
+                                            from_json( "{".$clips_js."}" )
+                                        } catch {
+                                            {
+                                                clips => [
+                                                    {
+                                                        m3u8 => undef,
+                                                        duration => undef,
+                                                        thumbnailURL => undef
+                                                    }
+                                                ]    
+                                            }
+                                        };
+                                        return {
+                                            m3u => $clip_data->{clips}[0]{m3u8},
+                                            duration => $clip_data->{clips}[0]{duration},
+                                            episode_thumb => $clip_data->{clips}[0]{thumbnailURL}
+                                        };
+                                    };
+                                    
+                                };
+                                my $res = $one_episode_scraper->scrape( $episode->{episode_link} );
+                            }
                             push @episodes, $episode;
                         }
                         
@@ -94,7 +126,7 @@ my $showlist_scraper = scraper {
 sub _scrape {
     foreach my $url ( @showlist_urls ) {
         my $res = $showlist_scraper->scrape( URI->new( $url ) );
-        print Dumper($res)."\n";
+        print to_json( $res )."\n";
     }
 
 }
