@@ -9,6 +9,11 @@ use Try::Tiny;
 use Web::Scraper;
 use Data::Dumper;
 
+# Convert URI::http object to JSON
+sub URI::http::TO_JSON {
+    return shift->as_string;
+}
+
 # Pages with the list of shows
 my @showlist_urls = (
     "http://animal.discovery.com/tv/tv-shows.html",
@@ -73,37 +78,76 @@ my $showlist_scraper = scraper {
                         
                         my $res = $episode_list_scraper->scrape( $next_page_url );
                         foreach my $episode ( @{ $res->{episodes} } ) {
+                            my $episode_res;
                             # Fetch episodes or sub-episodes depending on playlist flag
                             if ( $episode->{playlist_size} =~ /^\d/ ) {
-                                
-                            } else {
                                 my $one_episode_scraper = scraper {
                                     process "script", 'js[]' => sub {
                                         my $tmp = $_->as_HTML();
                                         my ( $clips_js ) = $tmp =~ /(\"clips\":\s+\[[^]]+\])/ismx;
+                                        return
+                                            unless $clips_js;
                                         my $clip_data = try {
                                             from_json( "{".$clips_js."}" )
                                         } catch {
                                             {
                                                 clips => [
                                                     {
-                                                        m3u8 => undef,
-                                                        duration => undef,
-                                                        thumbnailURL => undef
+                                                        brokenJSON => $clips_js,
                                                     }
                                                 ]    
                                             }
                                         };
-                                        return {
-                                            m3u => $clip_data->{clips}[0]{m3u8},
-                                            duration => $clip_data->{clips}[0]{duration},
-                                            episode_thumb => $clip_data->{clips}[0]{thumbnailURL}
-                                        };
+                                        my $ret;
+                                        foreach my $clip ( @{ $clip_data->{clips} } ) {
+                                            push @$ret, {
+                                                m3u => $clip->{m3u8},
+                                                duration => $clip->{duration},
+                                                episode_thumb => URI->new( $clip->{thumbnailURL} ),
+                                                episode_title => $clip->{episodeTitle},
+                                                episode_thumb => URI->new( $clip->{thumbnailURL} ),
+                                                brokenJSON => $clip->{brokenJSON},
+                                            };
+                                        }
+                                        return { subepisodes => $ret };
                                     };
-                                    
                                 };
-                                my $res = $one_episode_scraper->scrape( $episode->{episode_link} );
+                                $episode_res = $one_episode_scraper->scrape( $episode->{episode_link} );
+                            } else {
+                                my $one_episode_scraper = scraper {
+                                    process "script", 'js[]' => sub {
+                                        my $tmp = $_->as_HTML();
+                                        my ( $clips_js ) = $tmp =~ /(\"clips\":\s+\[[^]]+\])/ismx;
+                                        return
+                                            unless $clips_js;
+                                        my $clip_data = try {
+                                            from_json( "{".$clips_js."}" )
+                                        } catch {
+                                            {
+                                                clips => [
+                                                    {
+                                                        brokenJSON => $clips_js,
+                                                    }
+                                                ]    
+                                            }
+                                        };
+                                        if ( $clip_data->{clips}[0]{m3u8} ) {
+                                            return {
+                                                m3u => $clip_data->{clips}[0]{m3u8},
+                                                duration => $clip_data->{clips}[0]{duration},
+                                                video_desc => $clip_data->{clips}[0]{videoCaption},
+                                                episode_title => $clip_data->{clips}[0]{episodeTitle},
+                                                episode_thumb => URI->new( $clip_data->{clips}[0]{thumbnailURL} ),
+                                                brokenJSON => $clip_data->{clips}[0]{brokenJSON},
+                                            };
+                                        } else {
+                                            return;
+                                        }
+                                    };
+                                };
+                                $episode_res = $one_episode_scraper->scrape( $episode->{episode_link} );
                             }
+                            @{ $episode }{ keys %{$episode_res->{js}[0]} } = values %{$episode_res->{js}[0]};
                             push @episodes, $episode;
                         }
                         
@@ -126,7 +170,7 @@ my $showlist_scraper = scraper {
 sub _scrape {
     foreach my $url ( @showlist_urls ) {
         my $res = $showlist_scraper->scrape( URI->new( $url ) );
-        print to_json( $res, { relaxed => 1, allow_blessed => 1 } )."\n";
+        print to_json( $res, { pretty => 1, relaxed => 1, allow_blessed => 1, convert_blessed => 1 } )."\n";
     }
 
 }
