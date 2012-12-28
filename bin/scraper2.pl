@@ -112,7 +112,9 @@ my $showlist_scraper = scraper {
                                         return { subepisodes => $ret };
                                     };
                                 };
-                                $episode_res = $one_episode_scraper->scrape( $episode->{episode_link} );
+                                $episode_res = try { 
+					$one_episode_scraper->scrape( $episode->{episode_link} ) 
+				} catch { undef };
                             } else {
                                 my $one_episode_scraper = scraper {
                                     process "script", 'js[]' => sub {
@@ -145,10 +147,14 @@ my $showlist_scraper = scraper {
                                         }
                                     };
                                 };
-                                $episode_res = $one_episode_scraper->scrape( $episode->{episode_link} );
+                                $episode_res = try {
+					$one_episode_scraper->scrape( $episode->{episode_link} )
+				} catch { undef };
                             }
-                            @{ $episode }{ keys %{$episode_res->{js}[0]} } = values %{$episode_res->{js}[0]};
-                            push @episodes, $episode;
+			    if ( $episode_res ) {
+                            	@{ $episode }{ keys %{$episode_res->{js}[0]} } = values %{$episode_res->{js}[0]};
+                            	push @episodes, $episode;
+			    }
                         }
                         
                         $next_page = undef;
@@ -161,7 +167,9 @@ my $showlist_scraper = scraper {
                     return { episodes => \@episodes };
                 };
         };
-        return $show_info_scraper->scrape( $show_data );
+        return try { 
+		$show_info_scraper->scrape( $show_data ) 
+	} catch { undef };
     }
 };
 
